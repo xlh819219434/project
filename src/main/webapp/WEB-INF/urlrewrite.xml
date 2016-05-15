@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+<urlrewrite>
+	<rule>
+		<note>登陆</note>
+		<from>^/$</from>
+		<to type="forward">/login/login.do</to>
+	</rule>
+	<!--  
+	<rule>
+		<note>管理员后台登录</note>
+		<from>^/admin/login.htm$</from>
+		<to>/admin/login/toLogin.htm</to>
+
+	</rule>
+	<rule>
+		<note>管理员后台</note>
+		<from>^/admin(\/*)$</from>
+		<to>/admin/login/toLogin.htm</to>
+	</rule>
+	-->
+</urlrewrite>

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhxie.dao.user.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.lhxie.model.user.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="location_address" property="locationAddress" jdbcType="VARCHAR" />
+    <result column="passwd" property="passwd" jdbcType="VARCHAR" />
+    <result column="is_valid" property="isValid" jdbcType="VARCHAR" />
+    <result column="is_confirm" property="isConfirm" jdbcType="VARCHAR" />
+    <result column="confirm_code" property="confirmCode" jdbcType="VARCHAR" />
+    <result column="sessionid" property="sessionid" jdbcType="VARCHAR" />
+    <result column="sessionid_expire_time" property="sessionidExpireTime" jdbcType="TIMESTAMP" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
+    <result column="login_error_cnt" property="loginErrorCnt" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="active_time" property="activeTime" jdbcType="TIMESTAMP" />
+    <result column="mod_time" property="modTime" jdbcType="TIMESTAMP" />
+    <result column="question1" property="question1" jdbcType="VARCHAR" />
+    <result column="answer1" property="answer1" jdbcType="VARCHAR" />
+    <result column="question2" property="question2" jdbcType="VARCHAR" />
+    <result column="answer2" property="answer2" jdbcType="VARCHAR" />
+    <result column="question3" property="question3" jdbcType="VARCHAR" />
+    <result column="answer3" property="answer3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userid, username, age, cellphone, gender, email, location_address, passwd, is_valid, 
+    is_confirm, confirm_code, sessionid, sessionid_expire_time, last_login_time, last_login_ip, 
+    login_error_cnt, create_time, active_time, mod_time, question1, answer1, question2, 
+    answer2, question3, answer3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lhxie.model.user.User" >
+    insert into t_user (id, userid, username, 
+      age, cellphone, gender, 
+      email, location_address, passwd, 
+      is_valid, is_confirm, confirm_code, 
+      sessionid, sessionid_expire_time, last_login_time, 
+      last_login_ip, login_error_cnt, create_time, 
+      active_time, mod_time, question1, 
+      answer1, question2, answer2, 
+      question3, answer3)
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{cellphone,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{locationAddress,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR}, 
+      #{isValid,jdbcType=VARCHAR}, #{isConfirm,jdbcType=VARCHAR}, #{confirmCode,jdbcType=VARCHAR}, 
+      #{sessionid,jdbcType=VARCHAR}, #{sessionidExpireTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{lastLoginIp,jdbcType=VARCHAR}, #{loginErrorCnt,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{activeTime,jdbcType=TIMESTAMP}, #{modTime,jdbcType=TIMESTAMP}, #{question1,jdbcType=VARCHAR}, 
+      #{answer1,jdbcType=VARCHAR}, #{question2,jdbcType=VARCHAR}, #{answer2,jdbcType=VARCHAR}, 
+      #{question3,jdbcType=VARCHAR}, #{answer3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhxie.model.user.User" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="cellphone != null" >
+        cellphone,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="locationAddress != null" >
+        location_address,
+      </if>
+      <if test="passwd != null" >
+        passwd,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+      <if test="isConfirm != null" >
+        is_confirm,
+      </if>
+      <if test="confirmCode != null" >
+        confirm_code,
+      </if>
+      <if test="sessionid != null" >
+        sessionid,
+      </if>
+      <if test="sessionidExpireTime != null" >
+        sessionid_expire_time,
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time,
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip,
+      </if>
+      <if test="loginErrorCnt != null" >
+        login_error_cnt,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="activeTime != null" >
+        active_time,
+      </if>
+      <if test="modTime != null" >
+        mod_time,
+      </if>
+      <if test="question1 != null" >
+        question1,
+      </if>
+      <if test="answer1 != null" >
+        answer1,
+      </if>
+      <if test="question2 != null" >
+        question2,
+      </if>
+      <if test="answer2 != null" >
+        answer2,
+      </if>
+      <if test="question3 != null" >
+        question3,
+      </if>
+      <if test="answer3 != null" >
+        answer3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="cellphone != null" >
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="locationAddress != null" >
+        #{locationAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=VARCHAR},
+      </if>
+      <if test="isConfirm != null" >
+        #{isConfirm,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmCode != null" >
+        #{confirmCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionid != null" >
+        #{sessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionidExpireTime != null" >
+        #{sessionidExpireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null" >
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginErrorCnt != null" >
+        #{loginErrorCnt,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activeTime != null" >
+        #{activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modTime != null" >
+        #{modTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="question1 != null" >
+        #{question1,jdbcType=VARCHAR},
+      </if>
+      <if test="answer1 != null" >
+        #{answer1,jdbcType=VARCHAR},
+      </if>
+      <if test="question2 != null" >
+        #{question2,jdbcType=VARCHAR},
+      </if>
+      <if test="answer2 != null" >
+        #{answer2,jdbcType=VARCHAR},
+      </if>
+      <if test="question3 != null" >
+        #{question3,jdbcType=VARCHAR},
+      </if>
+      <if test="answer3 != null" >
+        #{answer3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhxie.model.user.User" >
+    update t_user
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="cellphone != null" >
+        cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="locationAddress != null" >
+        location_address = #{locationAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        passwd = #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=VARCHAR},
+      </if>
+      <if test="isConfirm != null" >
+        is_confirm = #{isConfirm,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmCode != null" >
+        confirm_code = #{confirmCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionid != null" >
+        sessionid = #{sessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionidExpireTime != null" >
+        sessionid_expire_time = #{sessionidExpireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginErrorCnt != null" >
+        login_error_cnt = #{loginErrorCnt,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activeTime != null" >
+        active_time = #{activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modTime != null" >
+        mod_time = #{modTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="question1 != null" >
+        question1 = #{question1,jdbcType=VARCHAR},
+      </if>
+      <if test="answer1 != null" >
+        answer1 = #{answer1,jdbcType=VARCHAR},
+      </if>
+      <if test="question2 != null" >
+        question2 = #{question2,jdbcType=VARCHAR},
+      </if>
+      <if test="answer2 != null" >
+        answer2 = #{answer2,jdbcType=VARCHAR},
+      </if>
+      <if test="question3 != null" >
+        question3 = #{question3,jdbcType=VARCHAR},
+      </if>
+      <if test="answer3 != null" >
+        answer3 = #{answer3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhxie.model.user.User" >
+    update t_user
+    set userid = #{userid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      cellphone = #{cellphone,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      location_address = #{locationAddress,jdbcType=VARCHAR},
+      passwd = #{passwd,jdbcType=VARCHAR},
+      is_valid = #{isValid,jdbcType=VARCHAR},
+      is_confirm = #{isConfirm,jdbcType=VARCHAR},
+      confirm_code = #{confirmCode,jdbcType=VARCHAR},
+      sessionid = #{sessionid,jdbcType=VARCHAR},
+      sessionid_expire_time = #{sessionidExpireTime,jdbcType=TIMESTAMP},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      login_error_cnt = #{loginErrorCnt,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      active_time = #{activeTime,jdbcType=TIMESTAMP},
+      mod_time = #{modTime,jdbcType=TIMESTAMP},
+      question1 = #{question1,jdbcType=VARCHAR},
+      answer1 = #{answer1,jdbcType=VARCHAR},
+      question2 = #{question2,jdbcType=VARCHAR},
+      answer2 = #{answer2,jdbcType=VARCHAR},
+      question3 = #{question3,jdbcType=VARCHAR},
+      answer3 = #{answer3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
