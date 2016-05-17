@@ -41,6 +41,12 @@
     from t_user
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectByUserid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where userid = #{userid,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_user
     where id = #{id,jdbcType=BIGINT}
@@ -338,4 +344,10 @@
       answer3 = #{answer3,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  
+  
+  
+  
+  
 </mapper>
