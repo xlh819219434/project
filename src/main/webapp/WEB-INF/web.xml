@@ -25,6 +25,11 @@
 			<param-value>UTF-8</param-value>
 		</init-param>
 	</filter>
+	<!-- 过滤非法请求 将所有jsp，do，action请求过滤掉，直接重定向到错误页面 -->
+	<filter>
+		<filter-name>filterRequest</filter-name>
+		<filter-class>com.lhxie.common.filter.FilterRequest</filter-class>
+	</filter>
 	<filter>
 		<description>登录过滤器</description>
 		<filter-name>loginFilter</filter-name>
@@ -54,12 +59,31 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>loginFilter</filter-name>
+		<filter-name>filterRequest</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
+		<filter-name>filterRequest</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>filterRequest</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<!-- <filter-mapping>
+		<filter-name>filterRequest</filter-name>
+		<url-pattern>*.myproject</url-pattern>
+	</filter-mapping> -->
+	
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
 		<filter-name>UrlRewriteFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.html</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>DruidWebStatFilter</filter-name>
@@ -103,7 +127,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springMvc</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.myproject</url-pattern>
 	</servlet-mapping>
 
 	<!-- 1、提供监控信息展示的html页面 2、提供监控信息的JSON API 访问地址: http://ip:port/druid/index.html 

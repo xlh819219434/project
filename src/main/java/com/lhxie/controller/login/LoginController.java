@@ -1,6 +1,5 @@
 package com.lhxie.controller.login;
 
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.lhxie.common.Tool.StringTool;
 import com.lhxie.common.Tool.Tool;
 import com.lhxie.model.user.User;

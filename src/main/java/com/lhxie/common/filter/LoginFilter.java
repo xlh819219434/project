@@ -42,8 +42,8 @@ public class LoginFilter implements Filter {
 		}
 		//没有登录 重定向到登录页面
 		if(!isLoginFlag) {
-			req.getRequestDispatcher(req.getContextPath() + "/pages/user/login.jsp").forward(req, resp);
-			chain.doFilter(request, response); 
+			req.getRequestDispatcher(req.getContextPath() + "/pages/user/login.html").forward(req, resp);
+			return;
 		}
 	}
 

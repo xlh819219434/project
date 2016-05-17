@@ -2,6 +2,12 @@
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
 <urlrewrite>
+
+	<rule>
+		<note>将所有html重定向为myproject(在web.xml定义)</note>
+		<from>/([A-Za-z0-9]+).html</from>
+		<to type="forward">/$1.myproject</to>
+	</rule>
 	<!-- 
 	<rule>
 		<note>登陆</note>
