@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lhxie.common.Tool.StringTool;
@@ -28,11 +30,11 @@ public class LoginController {
 		return "/user/login";
 	}
 
-	@RequestMapping("/checkLogin")
+	@RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> checkLogin(HttpServletRequest req, HttpServletResponse resp,
-			User user) throws Exception {
-		Map<String,Object> rtnMap = new HashMap<String,Object>();
+	public Map<String, Object> checkLogin(HttpServletRequest req,
+			HttpServletResponse resp, @RequestBody User user) throws Exception {
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		String result = "";
 
 		String encodePasswd = StringTool.toMD5HexString(user.getPasswd());
@@ -68,7 +70,18 @@ public class LoginController {
 	}
 
 	@RequestMapping("/register")
-	public String registerUser() {
-		return "/user/register";
+	@ResponseBody
+	public Map<String, Object> registerUser(@RequestBody User user) {
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		String result = "success";
+		User tempUser = userServiceImpl.selectByUserid(user.getUserid());
+		if (tempUser != null) {
+			result = "用户:[" + user.getUserid() + "]已经被注册。";
+		} else {
+			user.setId(Tool.createId());
+			userServiceImpl.insertSelective(user);
+		}
+		rtnMap.put("rtnMsg", result);
+		return rtnMap;
 	}
 }

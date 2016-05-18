@@ -84,148 +84,41 @@
 <script type="text/javascript" src="${ctx}/pages/r/js/validate.js"></script>
 <script type="text/javascript" src="${ctx}/pages/r/js/common.js"></script>
 <script type="text/javascript" src="${ctx}/pages/r/js/plugins.js"></script>
-<script type="text/javascript" src="${ctx}/pages/user/js/login.js?version=20160516"></script>
 <script>
 
-	/*	
-	$(document).ready(
-			function() {
-				jQuery.ajax({
-					type : 'GET',
-					contentType : 'application/json',
-					url : 'user/list',
-					dataType : 'json',
-					success : function(data) {
-						if (data && data.success == "true") {
-							$('#info').html("共" + data.total + "条数据。<br/>");
-							$.each(data.data, function(i, item) {
-								$('#info').append(
-										"编号：" + item.id + "，姓名："
-												+ item.username + "，年龄："
-												+ item.age);
-							});
-						}
-					},
-					error : function() {
-						alert("error")
-					}
-				});
-				$("#submit").click(function() {
-					var jsonuserinfo = $.toJSON($('#form').serializeObject());
-					alert(jsonuserinfo);
-					jQuery.ajax({
-						type : 'POST',
-						contentType : 'application/json',
-						url : 'user/add',
-						data : jsonuserinfo,
-						dataType : 'json',
-						success : function(data) {
-							alert("新增成功！");
-						},
-						error : function(data) {
-							alert("error")
-						}
-					});
-				});
-			});
-	
-			$(function() {
-		$('#form1').form({
-			success : function(data) {
-				if (data) {
-					alert(data)
-					data = JSON.parse(data);
-					if (data.rtnMsg == 'success') {
-						location.href = "${ctx}/pages/index.jsp";
-					} else {
-						$("#msg").html(data.rtnMsg);
-						$("#msg").css("display", "");
-					}
-				}
+	//注册
+	function register() {
+		var url = "${ctx}/pages/user/register.jsp";
+		window.open(url);
+	}
 
-			}
-		});
-	})
-	*/
-	/*
+	//登录
 	function submitForm() {
-				alert('a')
-		var formData = $("#form1").serializeObject();
+		//$('#form1').form('submit');
+		if (!$("#form1").form('validate')) {
+			return;
+		}
+		var user = $("#form1").serializeObject();
 		$.ajax({
 			type : 'POST',
 			contentType : 'application/json',
-			url : '${ctx}/login/checkLogin.do',
-			data : JSON.stringify(formData),
+			url : '${ctx}/login/checkLogin.html',
+			data : JSON.stringify(user),
 			dataType : 'json',
 			success : function(data) {
-				if (data) {
-					alert(data)
-					data = JSON.parse(data);
-					if (data.rtnMsg == 'success') {
-						location.href = "${ctx}/pages/index.jsp";
-					} else {
-						$("#msg").html(data.rtnMsg);
-						$("#msg").css("display", "");
-					}
+				if (data.rtnMsg == 'success') {
+					location.href = "${ctx}/pages/index.jsp";
+				} else {
+					$("#msg").html(data.rtnMsg);
+					$("#msg").css("display", "");
 				}
 			},
 			error : function(data) {
-				alert("error")
-			}
+				alert("error:" + data)
+			} 
 		});
-		
-		$.ajax({
-			url : '${ctx}/login/checkLogin.do',
-			data : {
-				"___p" : JSON.stringify(formData)
-			},
-			type : "post",
-			async : true,
-			dataType : "json",
-			beforeSend : function(jqXHR, settings) {
-				try {
-					loading(); // 加载蒙版
-				} catch (e) {
-				}
-				return true;
-			},
-			success : function(data, textStatus, jqXHR) {
-				if (!dealCommonResponse(data) && typeof successCallback == 'function') {
-					try {
-						successCallback(data, data ? data.retMsg || {} : {});
-					} catch (e) {
-						console.log('http do successCallback exception: ' + e.message);
-					}
-				}
-			},
-			error : function(jqXHR, textStatus, errorThrown) {
-				// textStatus: null, "timeout", "error", "abort", "parsererror"
-				// errorThrown: "Not Found", "Internal Server Error."
-				if (typeof errorCallback == 'function') {
-					try {
-						errorCallback(jqXHR, textStatus, errorThrown);
-					} catch (e) {
-						console.log('http do errorCallback exception: ' + e.message);
-					}
-				} else {
-					var msg = '出现异常，请联系管理员。异常信息：' + textStatus + ", " + errorThrown;
-					top.$.messager.alert('错误信息', msg, 'error');
-				}
-			},
-			complete : function(jqXHR, textStatus) {
-				try {
-					unloading(); // 加载蒙版
-				} catch (e) {
-				}
-			}
-		});		
-				
-	}*/
-	function submitForm() {
-		$('#form1').form('submit');
-		//location.href = "${ctx}/jsp/index.jsp";
 	}
-	
+	//通过jQuery的form.js插件来提交表单
 	$(function() {
 		$('#form1').form({
 			success : function(data) {
