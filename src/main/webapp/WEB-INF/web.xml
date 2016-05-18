@@ -70,10 +70,11 @@
 		<filter-name>filterRequest</filter-name>
 		<url-pattern>*.htm</url-pattern>
 	</filter-mapping>
-	<!-- <filter-mapping>
+	
+	<filter-mapping>
 		<filter-name>filterRequest</filter-name>
-		<url-pattern>*.myproject</url-pattern>
-	</filter-mapping> -->
+		<url-pattern>*.springmvc</url-pattern>
+	</filter-mapping>
 	
 	<filter-mapping>
 		<filter-name>loginFilter</filter-name>
@@ -127,7 +128,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springMvc</servlet-name>
-		<url-pattern>*.myproject</url-pattern>
+		<url-pattern>*.springmvc</url-pattern>
 	</servlet-mapping>
 
 	<!-- 1、提供监控信息展示的html页面 2、提供监控信息的JSON API 访问地址: http://ip:port/druid/index.html 

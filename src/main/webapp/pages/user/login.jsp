@@ -27,7 +27,7 @@
 
 </head>
 <body style="margin:0px;font-size:12px;background: url('${ctx}/pages/r/img/back.png');">
-	<form id="form1" method="post" action="${ctx}/login/checkLogin.do">
+	<form id="form1" method="post" action="${ctx}/login/checkLogin.html">
 		<table width="400" border="0" align="center">
 			<tr>
 				<td>
@@ -230,7 +230,6 @@
 		$('#form1').form({
 			success : function(data) {
 				if (data) {
-					alert(data)
 					data = JSON.parse(data);
 					if (data.rtnMsg == 'success') {
 						location.href = "${ctx}/pages/index.jsp";

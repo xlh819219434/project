@@ -25,6 +25,14 @@ public class LoginFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse resp = (HttpServletResponse)response;
+		
+		//如果是登录验证，则不验证是否登录
+		String url = req.getRequestURL().toString();
+		if(url.indexOf(req.getContextPath() + "/login") > 0) {
+			chain.doFilter(request, response);
+			return;
+		}
+		
 		Cookie[] cookies = req.getCookies();
 		boolean isLoginFlag = false;
 		if(cookies != null && cookies.length > 0) {
@@ -42,7 +50,7 @@ public class LoginFilter implements Filter {
 		}
 		//没有登录 重定向到登录页面
 		if(!isLoginFlag) {
-			req.getRequestDispatcher(req.getContextPath() + "/pages/user/login.html").forward(req, resp);
+			req.getRequestDispatcher("/login/login.html").forward(req, resp);
 			return;
 		}
 	}

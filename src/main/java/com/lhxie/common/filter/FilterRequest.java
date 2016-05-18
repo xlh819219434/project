@@ -21,7 +21,7 @@ public class FilterRequest implements Filter{
 			throws IOException, ServletException {
 			HttpServletRequest request = (HttpServletRequest)arg0;
 			//重定向到错误提示页面
-			request.getRequestDispatcher(request.getContextPath() + "/login/login.html").forward(arg0, arg1);
+			request.getRequestDispatcher("/login/login.html").forward(arg0, arg1);
 			return;
 	}
 

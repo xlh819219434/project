@@ -6,7 +6,7 @@
 	<rule>
 		<note>将所有html重定向为myproject(在web.xml定义)</note>
 		<from>/([A-Za-z0-9]+).html</from>
-		<to type="forward">/$1.myproject</to>
+		<to type="forward">/$1.springmvc</to>
 	</rule>
 	<!-- 
 	<rule>
