@@ -11,6 +11,14 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 
 	<!-- 自动扫描(自动注入) 将包下面的通过注解 @service 的类 加入到 springcontext 中 -->
 	<context:component-scan base-package="com.lhxie.service" />
+	
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<!-- 国际化信息所在的文件名 -->
+		<property name="basename" value="messages/message" />
+		<!-- 如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称 -->
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
 
 
 </beans>

@@ -79,6 +79,7 @@ public class LoginController {
 			result = "用户:[" + user.getUserid() + "]已经被注册。";
 		} else {
 			user.setId(Tool.createId());
+			user.setPasswd(StringTool.toMD5HexString(user.getPasswd()));
 			userServiceImpl.insertSelective(user);
 		}
 		rtnMap.put("rtnMsg", result);

@@ -44,7 +44,7 @@
 							<div style="margin-bottom: 20px">
 								<input class="easyui-textbox" type="password"
 									style="width: 100%; height: 40px; padding: 12px"
-									required="required" id="passwd" name="passwd"
+									required="required" id="passwd" name="passwd" id="passwd"
 									data-options="prompt:'请输入密码',iconCls:'icon-lock',iconWidth:38">
 							</div>
 							<div style="margin-bottom: 20px">
@@ -85,9 +85,9 @@
 <script type="text/javascript" src="${ctx}/pages/r/js/common.js"></script>
 <script type="text/javascript" src="${ctx}/pages/r/js/plugins.js"></script>
 <script>
-
 	//注册
 	function register() {
+		alert('a')
 		var url = "${ctx}/pages/user/register.jsp";
 		window.open(url);
 	}
@@ -115,7 +115,7 @@
 			},
 			error : function(data) {
 				alert("error:" + data)
-			} 
+			}
 		});
 	}
 	//通过jQuery的form.js插件来提交表单
