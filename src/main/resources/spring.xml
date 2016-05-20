@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
 http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/context
@@ -7,11 +9,23 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 ">
 
 	<!-- 引入属性文件 -->
-	<context:property-placeholder location="classpath:config.properties" />
+	<!-- <context:property-placeholder location="classpath:config.properties" /> -->
+	
+	<!-- 引入properties配置文件 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:redis.properties</value>
+				<value>classpath:config.properties</value>
+				<!--要是有多个配置文件，只需在这里继续添加即可 -->
+			</list>
+		</property>
+	</bean>
 
 	<!-- 自动扫描(自动注入) 将包下面的通过注解 @service 的类 加入到 springcontext 中 -->
 	<context:component-scan base-package="com.lhxie.service" />
-	
+
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<!-- 国际化信息所在的文件名 -->
@@ -20,5 +34,44 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		<property name="useCodeAsDefaultMessage" value="true" />
 	</bean>
 
+	<!-- jedis 配置 -->
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<property name="maxWaitMillis" value="${redis.maxWait}" />
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+	</bean>
+
+	<!-- redis服务器中心 -->
+	<bean id="connectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="poolConfig" ref="poolConfig" />
+		<property name="port" value="${redis.port}" />
+		<property name="hostName" value="${redis.host}" />
+		<!-- <property name="password" value="${redis.password}" /> -->
+		<property name="timeout" value="${redis.timeout}"></property>
+	</bean>
+
+	<!-- 通过这个bean来对redis操作 -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+	</bean>
+
+	<!-- aop配置切点跟通知 -->
+	<bean id="methodCachePointCut"
+		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="methodCacheInterceptor" />
+		<property name="pattern" value=".*ServiceImpl.*getTimestamp" />
+	</bean>
+
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
 
 </beans>
